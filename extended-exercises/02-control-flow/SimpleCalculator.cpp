@@ -2,22 +2,30 @@
 #include <stdio.h>
 #include <math.h>
 
+// Function declarations
+int eOption(int &n);
+
+// Main function
 int main()
 {
-   // Declare variables
+   printf("Operatoablesr: + - * / ^ %\n");
+   // Variable declarations
    double a, b, result;
    char opr; // Operator: + - * / ^ % ?
+   int n;    // eOption variable
 
-   // Input
-   printf("Enter an expression (e.g., 3 + 5): \n| ");
-   if (scanf("%lf %c %lf", &a, &opr, &b) != 3)
+   do
    {
-      printf("Invalid input!");
-      return 0;
-   }
-   else
-   {
-      // Perform calculation
+      // Input
+      printf("=====================================\n");
+      printf("Enter an expression (e.g., 3 + 5): \n| ");
+      if (scanf("%lf %c %lf", &a, &opr, &b) != 3)
+      {
+         printf("Invalid input!");
+         return 0;
+      }
+
+      // Processing
       switch (opr)
       {
       case '+':
@@ -68,8 +76,24 @@ int main()
          printf("Invalid expression!");
          return 0;
       }
-      printf("| The result: %.2lf", result);
-   }
 
+      // Output
+      printf("| The result: %.2lf", result);
+      eOption(n);
+   } while (n == 1);
+
+   printf("| Exit!");
    return 0;
+}
+
+// Function definitions
+int eOption(int &n)
+{
+   n = 0;
+   printf("\n-------------------------------------\n");
+   printf("Press '1' than 'Enter' to do again or any another to close!\n");
+   printf("---- Your option: ");
+   if (scanf("%d", &n) != 1)
+      return 0;
+   return n;
 }
