@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 // Function declarations
-int menu(int &n);
-int eOption(int &n);
+int menu(int* n);
+int eOption(int* n);
 
 // Main function
 int main()
@@ -14,7 +14,7 @@ int main()
 
 // Input
 menu:
-   menu(n);
+   menu(&n);
 
    // Processing
    switch (n)
@@ -35,7 +35,7 @@ menu:
             }
          } while (a < 33 || a > 126);
          printf("| %d - '%c'\n", a, a);
-         eOption(n);
+         eOption(&n);
       } while (n == 1);
       if (n == 2)
       {
@@ -72,7 +72,7 @@ menu:
             }
          }
 
-         eOption(n);
+         eOption(&n);
       } while (n == 1);
       if (n == 2)
       {
@@ -87,7 +87,7 @@ menu:
          printf("-[3]- Enter a character: ");
          scanf(" %c", &c);
          printf("| %c - %d\n", c, c);
-         eOption(n);
+         eOption(&n);
       } while (n == 1);
       if (n == 2)
       {
@@ -103,7 +103,7 @@ menu:
 }
 
 // Function Definitions
-int menu(int &n)
+int menu(int *n)
 {
    printf("===========================================\n| MENU\n");
    printf("0. Exit.\n");
@@ -112,27 +112,23 @@ int menu(int &n)
    printf("3. Enter a character to print its corresponding decimal value.\n");
    do
    {
+      *n = -1;
       printf("---- Choose an option: ");
-      if (scanf("%d", &n) != 1)
-      {
-         printf("| Invalid input!");
+      if (scanf("%d", n) != 1)
          return 0;
-      }
-   } while (n < 0 || n > 3);
-   return n;
+   } while (*n < 0 || *n > 3);
+   return *n;
 }
-int eOption(int &n)
+int eOption(int* n)
 {
    printf("---------------------\n");
    printf("0. Exit.\n1. Try again.\n2. View menu.\n");
    do
    {
+      *n = -1;
       printf("---- Choose an option: ");
-      if (scanf("%d", &n) != 1)
-      {
-         printf("| Invalid input!");
+      if (scanf("%d", n) != 1)
          return 0;
-      }
-   } while (n < 0 || n > 2);
-   return n;
+   } while (*n < 0 || *n > 2);
+   return *n;
 }
